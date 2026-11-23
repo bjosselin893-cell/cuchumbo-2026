@@ -3,193 +3,178 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cuchumbo Familiar 2026 - Gratis</title>
+  <title>Cuchumbo Familiar 2026</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: radial-gradient(circle at top, #1b4332 0%, #081c15 100%);
-      color: #ffffff;
+      margin: 0;
       min-height: 100vh;
+      background: #0d3b26;
+      color: #ffffff;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      padding: 24px 16px 44px;
+      justify-content: center;
+      padding: 20px;
     }
-
-    header {
+    .card {
+      width: 100%;
+      max-width: 440px;
+      background: #145336;
+      border: 2px solid #d4af37;
+      border-radius: 16px;
+      padding: 28px 22px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
       text-align: center;
-      margin-bottom: 20px;
     }
-
     h1 {
-      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      margin: 0 0 8px;
+      font-size: 1.65rem;
       color: #ffd166;
-      margin-bottom: 8px;
     }
-
     p.subtitle {
-      color: #d8f3dc;
-      font-size: 0.98rem;
-      max-width: 600px;
+      margin: 0 0 22px;
+      font-size: 0.95rem;
+      color: #e2f1e8;
       line-height: 1.4;
     }
-
-    .box {
-      background: rgba(255, 255, 255, 0.08);
-      border: 2px solid #ffd166;
-      border-radius: 18px;
-      padding: 20px;
-      width: 100%;
-      max-width: 560px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    }
-
-    .controls {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
-
-    button {
-      flex: 1;
-      min-width: 170px;
-      background: linear-gradient(135deg, #d62828, #9b2226);
-      color: #ffffff;
-      border: 2px solid #ffd166;
-      padding: 11px 16px;
-      font-size: 0.96rem;
-      font-weight: bold;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-    }
-
-    button.secondary {
-      background: linear-gradient(135deg, #2d6a4f, #1b4332);
-    }
-
-    .list {
-      display: grid;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .item {
-      background: rgba(255, 253, 247, 0.95);
-      color: #1b4332;
-      border-radius: 12px;
-      padding: 12px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 700;
-      border-left: 5px solid #d62828;
-    }
-
-    .item span.arrow {
-      color: #9b2226;
-      font-weight: 800;
-    }
-
-    .msg {
-      margin-top: 12px;
-      font-size: 0.88rem;
+    label {
+      display: block;
+      text-align: left;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
       color: #ffd166;
-      text-align: center;
-      min-height: 20px;
+      font-weight: 600;
+    }
+    select, input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #d4af37;
+      background: #ffffff;
+      color: #111827;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      background: #c1121f;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.92; }
+    .resultado {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #ffffff;
+      color: #111827;
+      display: none;
+    }
+    .resultado .nombre-asignado {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #c1121f;
+      margin-top: 6px;
+    }
+    .error {
+      margin-top: 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(193, 18, 31, 0.25);
+      border: 1px solid #ff758f;
+      color: #ffe5ec;
+      font-size: 0.9rem;
+      display: none;
     }
   </style>
 </head>
 <body>
-
-  <header>
+  <div class="card">
     <h1>Cuchumbo Familiar 2026</h1>
-    <p class="subtitle">Sorteo sin suscripciones: asigna a cada participante alguien distinto, sin repetirse y sin sacarse a sí mismo.</p>
-  </header>
+    <p class="subtitle">Selecciona tu nombre y escribe tu PIN secreto para ver a quién te toca regalar.</p>
 
-  <section class="box">
-    <div class="controls">
-      <button type="button" id="btnGenerar">Generar sorteo nuevo</button>
-      <button type="button" class="secondary" id="btnCopiar">Copiar lista para WhatsApp</button>
+    <label for="participante">Tu nombre</label>
+    <select id="participante">
+      <option value="">-- Elige tu nombre --</option>
+      <option value="Estefany">Estefany</option>
+      <option value="Mami">Mami</option>
+      <option value="Eduard">Eduard</option>
+      <option value="Wilmer">Wilmer</option>
+      <option value="Maite">Maite</option>
+      <option value="Sophia">Sophia</option>
+      <option value="Fernanda">Fernanda</option>
+      <option value="Gaby">Gaby</option>
+    </select>
+
+    <label for="pin">Tu PIN personal</label>
+    <input type="password" id="pin" inputmode="numeric" maxlength="6" placeholder="Ej. 1024" />
+
+    <button type="button" onclick="verAsignacion()">Ver mi asignación</button>
+
+    <div id="errorBox" class="error"></div>
+
+    <div id="resultadoBox" class="resultado">
+      <div>Te toca regalar a:</div>
+      <div id="asignadoTexto" class="nombre-asignado"></div>
     </div>
-
-    <div class="list" id="listaSorteo"></div>
-    <div class="msg" id="msg"></div>
-  </section>
+  </div>
 
   <script>
-    const participantes = [
-      "Fernanda",
-      "Maite",
-      "Estefany",
-      "Wilmer",
-      "Eduard",
-      "Sophia",
-      "Gaby",
-      "Mami"
-    ];
+    // Cambia estos PIN de 4 dígitos por los que tú quieras para cada persona
+    const pines = {
+      "Estefany": "1111",
+      "Mami": "2222",
+      "Eduard": "3333",
+      "Wilmer": "4444",
+      "Maite": "5555",
+      "Sophia": "6666",
+      "Fernanda": "7777",
+      "Gaby": "8888"
+    };
 
-    let parejasActuales = [];
+    // Ciclo cerrado: cada persona regala a la siguiente y nadie se saca a sí mismo
+    const asignaciones = {
+      "Estefany": "Mami",
+      "Mami": "Eduard",
+      "Eduard": "Wilmer",
+      "Wilmer": "Maite",
+      "Maite": "Sophia",
+      "Sophia": "Fernanda",
+      "Fernanda": "Gaby",
+      "Gaby": "Estefany"
+    };
 
-    function barajar(lista) {
-      const copia = [...lista];
-      for (let i = copia.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [copia[i], copia[j]] = [copia[j], copia[i]];
+    function verAsignacion() {
+      const persona = document.getElementById("participante").value;
+      const pinIngresado = document.getElementById("pin").value.trim();
+      const errorBox = document.getElementById("errorBox");
+      const resultadoBox = document.getElementById("resultadoBox");
+      const asignadoTexto = document.getElementById("asignadoTexto");
+
+      errorBox.style.display = "none";
+      resultadoBox.style.display = "none";
+
+      if (!persona) {
+        errorBox.textContent = "Por favor, selecciona tu nombre.";
+        errorBox.style.display = "block";
+        return;
       }
-      return copia;
-    }
 
-    function crearCicloSinAutosorteo(lista) {
-      const orden = barajar(lista);
-      return orden.map((quienRegala, i) => ({
-        quienRegala,
-        aQuienRegala: orden[(i + 1) % orden.length]
-      }));
-    }
-
-    function renderizar() {
-      parejasActuales = crearCicloSinAutosorteo(participantes);
-      const cont = document.getElementById("listaSorteo");
-      cont.innerHTML = "";
-
-      parejasActuales.forEach((p) => {
-        const fila = document.createElement("div");
-        fila.className = "item";
-        fila.innerHTML = `<span>${p.quienRegala}</span><span class="arrow">regala a</span><span>${p.aQuienRegala}</span>`;
-        cont.appendChild(fila);
-      });
-
-      document.getElementById("msg").textContent = "";
-    }
-
-    document.getElementById("btnGenerar").addEventListener("click", renderizar);
-
-    document.getElementById("btnCopiar").addEventListener("click", async () => {
-      const texto = parejasActuales
-        .map((p) => `${p.quienRegala} -> ${p.aQuienRegala}`)
-        .join("\n");
-      try {
-        await navigator.clipboard.writeText(texto);
-        document.getElementById("msg").textContent = "Lista copiada al portapapeles.";
-      } catch {
-        document.getElementById("msg").textContent = "Selecciona y copia la lista mostrada en pantalla.";
+      if (!pinIngresado || pines[persona] !== pinIngresado) {
+        errorBox.textContent = "PIN incorrecto para " + persona + ".";
+        errorBox.style.display = "block";
+        return;
       }
-    });
 
-    renderizar();
+      asignadoTexto.textContent = asignaciones[persona];
+      resultadoBox.style.display = "block";
+    }
   </script>
-
 </body>
 </html>
